@@ -16,7 +16,7 @@ let combinacaoVencedora = null;
 function inicializarJogo() {
   estado = {
     tabuleiro: Array(9).fill(null),
-    jogadorAtual: 'X',
+    jogadorAtual: estado.vencedor || 'X', // começa quem ganhou, ou X se ninguém ganhou antes
     fase: 'POSICIONAMENTO',
     pecasPosicionadas: { X: 0, O: 0 },
     vencedor: null,
