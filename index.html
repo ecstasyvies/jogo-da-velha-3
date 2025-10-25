@@ -13,16 +13,22 @@
         
         <p class="jogo__status" role="status" aria-live="polite">Carregando...</p>
 
-        <div class="jogo__tabuleiro" role="grid">
-            <button class="jogo__casa" data-index="0" aria-label="Casa 0, Vazia"></button>
-            <button class="jogo__casa" data-index="1" aria-label="Casa 1, Vazia"></button>
-            <button class="jogo__casa" data-index="2" aria-label="Casa 2, Vazia"></button>
-            <button class="jogo__casa" data-index="3" aria-label="Casa 3, Vazia"></button>
-            <button class="jogo__casa" data-index="4" aria-label="Casa 4, Vazia"></button>
-            <button class="jogo__casa" data-index="5" aria-label="Casa 5, Vazia"></button>
-            <button class="jogo__casa" data-index="6" aria-label="Casa 6, Vazia"></button>
-            <button class="jogo__casa" data-index="7" aria-label="Casa 7, Vazia"></button>
-            <button class="jogo__casa" data-index="8" aria-label="Casa 8, Vazia"></button>
+        <div class="jogo__tabuleiro" role="grid" aria-label="Tabuleiro do jogo">
+            <div role="row">
+                <button class="jogo__casa" data-index="0" role="gridcell" aria-label="Casa 0, Vazia"></button>
+                <button class="jogo__casa" data-index="1" role="gridcell" aria-label="Casa 1, Vazia"></button>
+                <button class="jogo__casa" data-index="2" role="gridcell" aria-label="Casa 2, Vazia"></button>
+            </div>
+            <div role="row">
+                <button class="jogo__casa" data-index="3" role="gridcell" aria-label="Casa 3, Vazia"></button>
+                <button class="jogo__casa" data-index="4" role="gridcell" aria-label="Casa 4, Vazia"></button>
+                <button class="jogo__casa" data-index="5" role="gridcell" aria-label="Casa 5, Vazia"></button>
+            </div>
+            <div role="row">
+                <button class="jogo__casa" data-index="6" role="gridcell" aria-label="Casa 6, Vazia"></button>
+                <button class="jogo__casa" data-index="7" role="gridcell" aria-label="Casa 7, Vazia"></button>
+                <button class="jogo__casa" data-index="8" role="gridcell" aria-label="Casa 8, Vazia"></button>
+            </div>
         </div>
 
         <div class="jogo__botoes">
