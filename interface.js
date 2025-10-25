@@ -1,4 +1,4 @@
-import { estado, obterEstado, getCombinacaoVencedora } from './estado.js';
+import { estado, obterEstado, getCombinacaoVencedora, processarMovimentoArrastar, processarCliqueCasa } from './estado.js';
 
 export let elementoTabuleiro = null;
 export let elementosCasa = null;
@@ -31,6 +31,39 @@ function renderizarTabuleiro() {
   const combinacaoVencedora = getCombinacaoVencedora();
   
   elementoTabuleiro.classList.toggle('jogo__tabuleiro--terminado', estadoAtual.jogoTerminado);
+  
+  // Atualizar classes de turno para o foco
+  elementosCasa.forEach(casa => {
+    casa.classList.remove('jogo__casa--turno-x', 'jogo__casa--turno-o');
+    if (!estadoAtual.jogoTerminado) {
+      casa.classList.add(`jogo__casa--turno-${estadoAtual.jogadorAtual.toLowerCase()}`);
+    }
+  });
+  
+  // Gerenciar ordem de tabulação e foco
+  const botaoReiniciar = document.querySelector('.jogo__botao-reiniciar');
+  if (estadoAtual.jogoTerminado) {
+    // Desabilitar tabulação nas casas e focar no botão de reiniciar
+    elementosCasa.forEach(casa => {
+      casa.setAttribute('tabindex', '-1');
+      if (casa === document.activeElement) {
+        botaoReiniciar.focus();
+      }
+    });
+    botaoReiniciar.setAttribute('tabindex', '0');
+  } else {
+    // Habilitar tabulação nas casas
+    elementosCasa.forEach(casa => casa.setAttribute('tabindex', '0'));
+    botaoReiniciar.setAttribute('tabindex', '0');
+  }
+  
+  // Configurar a ordem de tabulação
+  if (estadoAtual.jogoTerminado) {
+    elementosCasa.forEach(casa => casa.setAttribute('tabindex', '-1'));
+    document.querySelector('.jogo__botao-reiniciar').setAttribute('tabindex', '0');
+  } else {
+    elementosCasa.forEach(casa => casa.setAttribute('tabindex', '0'));
+  }
   
   elementosCasa.forEach((casa, indice) => {
     const peca = estadoAtual.tabuleiro[indice];
