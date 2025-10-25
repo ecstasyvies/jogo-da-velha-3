@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="jogo">
+        <h1 class="jogo__titulo">Jogo da Velha 3</h1>
+        
+        <p class="jogo__status" role="status" aria-live="polite">Carregando...</p>
+
+        <div class="jogo__tabuleiro" role="grid">
+            <button class="jogo__casa" data-index="0" aria-label="Casa 0, Vazia"></button>
+            <button class="jogo__casa" data-index="1" aria-label="Casa 1, Vazia"></button>
+            <button class="jogo__casa" data-index="2" aria-label="Casa 2, Vazia"></button>
+            <button class="jogo__casa" data-index="3" aria-label="Casa 3, Vazia"></button>
+            <button class="jogo__casa" data-index="4" aria-label="Casa 4, Vazia"></button>
+            <button class="jogo__casa" data-index="5" aria-label="Casa 5, Vazia"></button>
+            <button class="jogo__casa" data-index="6" aria-label="Casa 6, Vazia"></button>
+            <button class="jogo__casa" data-index="7" aria-label="Casa 7, Vazia"></button>
+            <button class="jogo__casa" data-index="8" aria-label="Casa 8, Vazia"></button>
+        </div>
+
+        <div class="jogo__botoes">
+            <button class="jogo__botao-reiniciar">Reiniciar Jogo</button>
+            <button class="jogo__botao-instrucoes">Instruções</button>
+        </div>
+    </main>
+
+    <div id="modal-instrucoes" class="modal">
+        <div class="modal__conteudo">
+            <h2 class="modal__titulo">Como Jogar</h2>
+            
+            <div class="modal__instrucoes">
+                <p>Na fase de posicionamento, cada jogador coloca suas peças em casas vazias, revezando-se. Depois que cada um tiver colocado três peças, começa a fase de movimento, na qual basta arrastar suas peças para casas livres. O objetivo é formar uma linha de três peças em qualquer direção: horizontal, vertical ou diagonal.</p>
+            </div>
+
+            <div class="modal__nomes-jogadores">
+                <h3>Nomes dos Jogadores ↓</h3>
+                <div class="modal__campo">
+                    <label for="nome-jogador-x">Jogador X:</label>
+                    <input type="text" id="nome-jogador-x" placeholder="Digite o nome" maxlength="20">
+                </div>
+                <div class="modal__campo">
+                    <label for="nome-jogador-o">Jogador O:</label>
+                    <input type="text" id="nome-jogador-o" placeholder="Digite o nome" maxlength="20">
+                </div>
+            </div>
+
+            <div class="modal__botoes">
+                <button id="botao-retornar" class="modal__botao modal__botao--secundario">Retornar</button>
+                <button id="botao-comecar" class="modal__botao modal__botao--primario">Começar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="principal.js"></script>
+</body>
+</html>
