@@ -1,8 +1,8 @@
-import { inicializarJogo } from './estado.js';
-import { inicializarElementosDOM, atualizarUI } from './interface.js';
-import { inicializarBotoes, configurarEventosTabuleiro, configurarEventosGerais } from './eventos.js';
-import { configurarModal } from './modal.js';
-import { configurarAcessibilidade } from './acessibilidade.js';
+import { inicializarJogo } from './logica/estado.js';
+import { inicializarElementosDOM, atualizarUI } from './interface/interface.js';
+import { inicializarBotoes, configurarEventosTabuleiro, configurarEventosGerais } from './eventos/eventos.js';
+import { configurarModal } from './interface/modal.js';
+import { configurarAcessibilidade } from './util/acessibilidade.js';
 
 function inicializarUI() {
   inicializarElementosDOM();
