@@ -31,14 +31,14 @@ function atualizarPosicaoFantasma(x, y) {
 function atualizarAlvoValido(elementoAlvo) {
   if (!elementoAlvo || !elementoAlvo.classList.contains('jogo__casa')) {
     if (ultimaCasaAlvo) {
-      ultimaCasaAlvo.classList.remove('jogo__casa--alvo-valido-x');
-      ultimaCasaAlvo.classList.remove('jogo__casa--alvo-valido-o');
+      ultimaCasaAlvo.classList.remove('jogo__casa--alvo-valido-x', 'jogo__casa--alvo-valido-o');
       ultimaCasaAlvo = null;
     }
     return;
   }
   
   const indiceAlvo = parseInt(elementoAlvo.dataset.index, 10);
+  const classeAlvo = estado.jogadorAtual === 'X' ? 'jogo__casa--alvo-valido-x' : 'jogo__casa--alvo-valido-o';
   
   if (estado.tabuleiro[indiceAlvo] === null) {
     if (ultimaCasaAlvo && ultimaCasaAlvo !== elementoAlvo) {
@@ -83,38 +83,36 @@ function aoIniciarArrasto(evento) {
   const indice = parseInt(casa.dataset.index, 10);
   
   if (estado.fase === 'MOVIMENTO' && estado.tabuleiro[indice] === estado.jogadorAtual && !estado.jogoTerminado) {
+    evento.dataTransfer.effectAllowed = 'move';
+    evento.dataTransfer.setData('text/plain', indice.toString());
+    
     elementoArrastando = casa;
     indiceOrigemArrasto = indice;
-    
-    elementoFantasma = criarElementoFantasma(casa);
-    
-    const rect = casa.getBoundingClientRect();
-    posicaoFantasma.x = rect.left + rect.width / 2;
-    posicaoFantasma.y = rect.top + rect.height / 2;
-    atualizarPosicaoFantasma(posicaoFantasma.x, posicaoFantasma.y);
-    
-    evento.dataTransfer.setData('text/plain', indice.toString());
-    evento.dataTransfer.effectAllowed = 'move';
-    
     casa.classList.add('jogo__casa--arrastando');
-    casa.style.opacity = '0.4';
     
-    evento.preventDefault();
+    // Criar e posicionar o elemento fantasma
+    elementoFantasma = criarElementoFantasma(casa);
+    const rect = casa.getBoundingClientRect();
+    atualizarPosicaoFantasma(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    
+    // Definir a imagem de arrasto como transparente
+    const img = new Image();
+    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
+    evento.dataTransfer.setDragImage(img, 0, 0);
   } else {
     evento.preventDefault();
   }
 }
 
 function aoArrastar(evento) {
-  if (elementoFantasma) {
-    const clientX = evento.clientX;
-    const clientY = evento.clientY;
-    
-    if (clientX && clientY) {
-      atualizarPosicaoFantasma(clientX, clientY);
-      const elementoAlvo = document.elementFromPoint(clientX, clientY);
-      atualizarAlvoValido(elementoAlvo);
-    }
+  if (elementoFantasma && evento.clientX !== 0 && evento.clientY !== 0) {
+    const x = evento.clientX;
+    const y = evento.clientY;
+    atualizarPosicaoFantasma(x, y);
+
+    // Encontrar a casa sob o cursor
+    const elementoAlvo = document.elementFromPoint(x, y);
+    atualizarAlvoValido(elementoAlvo);
   }
 }
 
