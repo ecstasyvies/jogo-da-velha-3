@@ -68,6 +68,14 @@ function aoClicarReiniciar() {
   limparEstadoArrasto();
   inicializarJogo();
   atualizarUI();
+  
+  // Focar na primeira casa do tabuleiro após reiniciar
+  const primeiraCasa = elementosCasa[0];
+  if (primeiraCasa) {
+    setTimeout(() => {
+      primeiraCasa.focus();
+    }, 0);
+  }
 }
 
 export {
